@@ -15,6 +15,7 @@ import { GithubIcon, Loader } from "lucide-react";
 import React, { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { emailValidation } from "@/lib/validations";
 
 const LoginForm = () => {
 
@@ -43,6 +44,11 @@ const LoginForm = () => {
   }
 
   async function SignInWithEmail(email: string){
+    const result = emailValidation.safeParse({ email });
+    if (!result.success) {
+      toast.error("Invalid email address.");
+      return;
+    }
     startEmailTransition(async ()=>{
         await authClient.emailOtp.sendVerificationOtp({
             email:email,
@@ -94,7 +100,7 @@ const LoginForm = () => {
               <Label htmlFor="email">Email</Label>
               <Input value={email} required onChange={(event)=> setEmail(event.target.value)} type="email" placeholder="abcd@example.co," />
             </div>
-            <Button onClick={()=> SignInWithEmail(email)}>Continue with email</Button>
+            <Button onClick={()=> SignInWithEmail(email)}>{isEmailPending?<Loader className="animate-spin"/>:<p>Continue with email</p>}</Button>
           </div>
         </CardContent>
       </Card>
