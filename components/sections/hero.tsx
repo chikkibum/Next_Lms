@@ -6,6 +6,7 @@ import HeroVideoDialog from "@/components/magicui/hero-video";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { ArrowBigRight, ArrowRight } from "lucide-react";
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -21,8 +22,9 @@ function HeroPill() {
       <div className="w-fit rounded-full bg-accent px-2 py-0.5 text-center text-xs font-medium text-primary sm:text-sm">
         📣 Announcement
       </div>
-      <p className="text-xs font-medium text-primary sm:text-sm">
-        Introducing Acme.ai
+      <p className="text-xs flex justify-between font-medium text-primary sm:text-sm">
+        Introducing Acme.ai 
+        <ArrowRight className="size-4"/>
       </p>
       <svg
         width="12"
@@ -54,10 +56,11 @@ function HeroTitles() {
           staggerChildren: 0.4,
         }}
       >
-        {["Teach", "your", "Favourite", "Subjects here"].map((text, index) => (
+        
+        {["Unlock ", "your", "Creative", "Potential",<Icons.logo/>].map((text, index) => (
           <motion.span
             key={index}
-            className="inline-block px-1 md:px-2 text-balance font-semibold"
+            className={`inline-block px-1 ${index==0 && "text-primary"} md:px-2 text-balance font-semibold`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -98,14 +101,14 @@ function HeroCTA() {
         transition={{ delay: 0.8, duration: 0.8, ease: ease as any }}
       >
         <Link
-          href="/signup"
+          href="/login"
           className={cn(
             buttonVariants({ variant: "default" }),
             "w-full sm:w-auto text-background flex gap-2"
           )}
         >
           <Icons.logo className="h-6 w-6" />
-          Get started for free
+          Explore Courses
         </Link>
       </motion.div>
       <motion.p

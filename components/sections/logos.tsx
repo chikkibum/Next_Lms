@@ -1,4 +1,4 @@
-import Marquee from "@/components/magicui/marquee";
+import { Marquee } from "../magicui/marquee";
 import Image from "next/image";
 
 const companies = [
@@ -20,7 +20,7 @@ export default function Logos() {
           TRUSTED BY LEADING TEAMS
         </h3>
         <div className="relative mt-6">
-          <Marquee className="max-w-full [--duration:40s]">
+          <Marquee  className="max-w-full [--duration:40s]">
             {companies.map((logo, idx) => (
               <Image
                 key={idx}
